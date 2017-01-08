@@ -10,11 +10,11 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='',
+    name='memopy',
     version='0.0.1',
-    description='',
+    description='Memoize / cache function call results',
     long_description=long_description,
-    url='',
+    url='https://github.com/tscizzle/memopy',
     author='Tyler Singer-Clark',
     author_email='tscizzle@gmail.com',
     license='MIT',
