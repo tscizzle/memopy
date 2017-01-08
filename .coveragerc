@@ -1,0 +1,8 @@
+[report]
+show_missing = True
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+exclude_lines =
+    pragma: no cover
+    def __repr__
