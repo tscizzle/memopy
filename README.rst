@@ -31,11 +31,13 @@ Apply the ``memoify`` decorator to a function to turn that function into a memo 
 
 Subsequent calls to ``multiply`` with the same args will not perform the multiplication, but rather look up the past answer.
 
-Multiplying numbers is not a typical use case, so take a look at a function which is inherently reused on the same arguments a lot.::
+Multiplying numbers is not a typical use case, so take a look at a function which is inherently reused on the same arguments a lot::
 
     @memoify
     def fibo(n):
-        return n if n in [0, 1] else (fibo(n-1) + fibo(n-2))
+        if n in [0, 1]:
+            return n
+        return fibo(n-1) + fibo(n-2)
 
 Without memoization, some values of the fibonacci sequence would be computed an exponential number of times. With the single line ``@memoify``, for a given ``n`` every computation after the first will be replaced with a lookup.
 
