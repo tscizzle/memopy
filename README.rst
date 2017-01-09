@@ -1,7 +1,14 @@
 MemoPy
 ======
 
-badges
+.. image:: https://travis-ci.org/tscizzle/memopy.svg?branch=master
+    :target: https://travis-ci.org/tscizzle/memopy
+
+.. image:: https://coveralls.io/repos/github/tscizzle/memopy/badge.svg?branch=master
+    :target: https://coveralls.io/github/tscizzle/memopy?branch=master
+
+.. image:: https://badge.fury.io/py/memopy.svg
+    :target: https://badge.fury.io/py/memopy
 
 Store results of functions calls so that subsequent calls with the same arguments do not have to redo work.
 This strategy of memoizing past results is only fully correct with "pure functions". Pure functions (https://en.wikipedia.org/wiki/Pure_function) are functions that, when run with the same arguments, always return the same result. They should not have any side effects (e.g. modifying global variables, writing to an external database), or depend on anything besides the parameters (e.g. a random number generator, reading from an external database). Typically any mathematically-defined function (fibonacci, factorial, sine, cosine, etc.) is a pure function.
