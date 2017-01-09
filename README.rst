@@ -10,45 +10,53 @@ But MemoPy can be useful with impure functions, too, when perfect correctness is
 Use
 ---
 
-Apply the ``memoify`` decorator to a function to turn that function into a memo function.::
+Import the memoify decorator::
 
-@memoify
-def multiply(x, y):
-    return x * y
+    from memopy.memopy import memoify
+
+Apply the ``memoify`` decorator to a function to turn that function into a memo function::
+
+    @memoify
+    def multiply(x, y):
+        return x * y
 
 Subsequent calls to ``multiply`` with the same args will not perform the multiplication, but rather look up the past answer.
 
 Multiplying numbers is not a typical use case, so take a look at a function which is inherently reused on the same arguments a lot.
 
-@memoify
-def fibo(n):
-    return n if n in [0, 1] else (fibo(n-1) + fibo(n-2))
+    @memoify
+    def fibo(n):
+        return n if n in [0, 1] else (fibo(n-1) + fibo(n-2))
 
-Without memoization, some values of the fibonacci sequence would be computed an exponential number of times. With the single line ``@memoify``, every computation after the first will be replaced with a lookup.
+Without memoization, some values of the fibonacci sequence would be computed an exponential number of times. With the single line ``@memoify``, for a given ``n`` every computation after the first will be replaced with a lookup.
 
-Function arguments are not *required* to be hashable, but they should be for best (fastest) results. If they are not, the memoizing version of the function could become slower than the original under special circumstances (depending on the runtime of the original function, and the number of different arguments the memoizing version has been called with).
+Function arguments are not *required* to be hashable, but they should be for best (fastest) results. If they are not, the memoizing version of the function could become slower than the original under special circumstances (depending on the runtime of the original function, and the number and nature of different arguments the memoizing version has been called with).
 
-MemoPy was not designed with concurrency in mind. So multiple runs of a function at the same time is advised against as it has not been thoroughly thought through what would happen.
+MemoPy was not designed with concurrency in mind. So multiple runs of the same function in different threads at the same time is advised against as it has not been thoroughly thought through what would happen.
 
 Documentation
 -------------
 
-
+The tests found on Github at https://github.com/tscizzle/memopy/tree/master/tests give some examples and showcase the library's functionality.
 
 Installation
 ------------
 
+If you don't have pip, get pip at: https://pip.pypa.io/en/stable/installing
 
+Run the command ``pip install memopy`` in your terminal to get the MemoPy library.
+
+To test your installation, start a Python interpreter with the ``python`` command in your terminal and make sure you can run ``import memopy`` in it without getting an error.
 
 Contribute
 ----------
 
-
+Find the code on Github at: https://github.com/tscizzle/memopy
 
 Support
 -------
 
-
+Contact me (Tyler Singer-Clark) at tscizzle@gmail.com with any questions or concerns.
 
 License
 -------
