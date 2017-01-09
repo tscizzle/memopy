@@ -168,6 +168,39 @@ class Testmemoify(unittest.TestCase):
         self.assertEqual(func1({'a': 5}, 'a', choices=[3, 4], choice_idx=1), 9)
         self.assertEqual(func1.num_calls, 2)
 
-    ## TODO: test clearing
+    def test_memoify_clear(self):
+        """ Clear the stored function call results """
+
+        @memoify
+        def func1(a, b):
+            func1.num_calls += 1
+            return a + b
+        func1.num_calls = 0
+
+        # make sure the function does not rerun for past inputs initially, but
+        # after being cleared it does run once again for past inputs
+
+        self.assertEqual(func1(2, 3), 5)
+        self.assertEqual(func1(2, 4), 6)
+        self.assertEqual(func1([1, 2], [3, 4]), [1, 2, 3, 4])
+        self.assertEqual(func1.num_calls, 3)
+
+        self.assertEqual(func1(2, 3), 5)
+        self.assertEqual(func1(2, 4), 6)
+        self.assertEqual(func1([1, 2], [3, 4]), [1, 2, 3, 4])
+        self.assertEqual(func1.num_calls, 3)
+
+        func1.clear()
+
+        self.assertEqual(func1(2, 3), 5)
+        self.assertEqual(func1(2, 4), 6)
+        self.assertEqual(func1([1, 2], [3, 4]), [1, 2, 3, 4])
+        self.assertEqual(func1.num_calls, 6)
+
+        self.assertEqual(func1(2, 3), 5)
+        self.assertEqual(func1(2, 4), 6)
+        self.assertEqual(func1([1, 2], [3, 4]), [1, 2, 3, 4])
+        self.assertEqual(func1.num_calls, 6)
+
 
     ## TODO: test handling exceptions

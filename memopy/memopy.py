@@ -25,8 +25,8 @@ def memoify(func):
             for past_non_hashables, past_answer in memo_dict[hashables]:
                 if past_non_hashables == non_hashables:
                     return past_answer
+        ## TODO: handle catching, storing, and raising exceptions in func
         answer = func(*args, **kwargs)
-        ## TODO: handling catching, storing, and raising exceptions
         memo_dict[hashables].append((non_hashables, answer))
         return answer
     memo_func.clear = memo_dict.clear
