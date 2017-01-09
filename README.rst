@@ -39,9 +39,22 @@ Multiplying numbers is not a typical use case, so take a look at a function whic
             return n
         return fibo(n-1) + fibo(n-2)
 
-Without memoization, some values of the fibonacci sequence would be computed an exponential number of times. With the single line ``@memoify``, for a given ``n`` every computation after the first will be replaced with a lookup.
+Without memoization, some values of the fibonacci sequence would be computed an exponential number of times. With the single line ``@memoify``, for a given ``n`` every computation after the first will be replaced with a lookup. Check out the difference between the above memoified version of fibo and the regular version of that same function::
+
+    def regular_fibo(n):
+        if n in [0, 1]:
+            return n
+        return regular_fibo(n-1) + regular_fibo(n-2)
+
+See how the difference grows as ``n`` grows larger. (For me, for example, with ``n = 30``, the difference is already very noticable, and with ``n = 100``, ``regular_fibo`` takes forever while the memoized ``fibo`` is still instant.)
+
+Hashability
+~~~~~~~~~~~
 
 Function arguments are not *required* to be hashable, but they should be for best (fastest) results. If they are not, the memoizing version of the function could become slower than the original under special circumstances (depending on the runtime of the original function, and the number and nature of different arguments the memoizing version has been called with).
+
+Concurrency
+~~~~~~~~~~~
 
 MemoPy was not designed with concurrency in mind. So multiple runs of the same function in different threads at the same time is advised against as it has not been thoroughly thought through what would happen.
 
